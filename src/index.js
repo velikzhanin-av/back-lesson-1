@@ -1,12 +1,12 @@
 const express = require('express')
-import {config} from "dotenv";
+// import {config} from "dotenv";
 
 const app = express()
 
-config()
-const PORT = process.env.port || 3000
+// config()
+const PORT =  3000
 
-app.get('/', (req: any, res: any) => {
+app.get('/', (req, res) => {
     res.send("Hello World")
 })
 

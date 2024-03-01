@@ -1,15 +1,6 @@
-const express = require('express')
-import {config} from "dotenv";
+import {SETTINGS} from "./settings";
+import {app} from "./app";
 
-const app = express()
-
-config()
-const PORT = process.env.port || 3000
-
-app.get('/', (req: any, res: any) => {
-    res.send("Hello World")
-})
-
-app.listen(PORT, () => {
-    console.log(`Example listening on port ${PORT}`)
+app.listen(SETTINGS.PORT, () => {
+    console.log(`Example listening on port ${SETTINGS.PORT}`)
 })

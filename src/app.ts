@@ -7,7 +7,7 @@ app.get('/', (req: any, res: any) => {
 })
 
 app.use('/hometask_01/api/testing/all-data', (req: any, res: any) => {
-    res.json({"delete all": "deg"})
+    res.status(204).send('All data is deleted')
 })
 
 app.get('/about', (req, res) => {

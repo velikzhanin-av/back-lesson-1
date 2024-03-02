@@ -8,7 +8,7 @@ app.get('/', (req: any, res: any) => {
 })
 
 app.get('/hometask_01/api/testing/all-data', (req: any, res: any) => {
-    res.status(204).send('All data is deleted')
+    res.status(204)
 })
 
 app.get('/about', (req, res) => {

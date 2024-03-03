@@ -2,7 +2,7 @@ import {req} from "./test-helpers";
 import {db} from "../src/app";
 
 
-describe('/testing/all-data', () => {
+describe('GET /testing/all-data', () => {
     it('return code status 204', async () => {
         const res = await req
             .delete('/testing/all-data')
@@ -10,7 +10,7 @@ describe('/testing/all-data', () => {
     })
 });
 
-describe('get /videos', () => {
+describe('GET /videos', () => {
     it('return all videos and code status 200', async () => {
         db.videos = [{title: 'title any video'}]
 

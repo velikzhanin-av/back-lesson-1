@@ -2,10 +2,10 @@ import {req} from "./test-helpers";
 import {db} from "../src/app";
 
 
-describe('/hometask_01/api/testing/all-data', () => {
+describe('/testing/all-data', () => {
     it('return code status 204', async () => {
         const res = await req
-            .get('/testing/all-data')
+            .delete('/testing/all-data')
             .expect(204)
     })
 });

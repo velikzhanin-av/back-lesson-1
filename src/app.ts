@@ -1,7 +1,10 @@
 import express from 'express'
 import {SETTINGS} from "./settings";
+import {createDB} from "./db";
 
 export const app = express()
+
+export const db = createDB()
 
 export const helloWorld = (req: any, res: any) => {
     res
@@ -17,9 +20,9 @@ export const deleteAll = (req: any, res: any) => {
 export const getVideos = (req: any, res: any) => {
     res
         .status(200)
-        .json({'description': 'All data is deleted'})
+        .json(db.videos)
 }
 
 app.get('/', helloWorld)
 app.get('/testing/all-data', deleteAll)
-app.get(SETTINGS.PATH.HOMETASK01 + SETTINGS.PATH.VIDEOS, getVideos)
+app.get(SETTINGS.PATH.VIDEOS, getVideos)

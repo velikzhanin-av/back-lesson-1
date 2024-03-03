@@ -14,7 +14,6 @@ export const helloWorld = (req: any, res: any) => {
 export const deleteAll = (req: any, res: any) => {
     res
         .status(204)
-        .json({'description': 'All data is deleted'})
 }
 
 export const getVideos = (req: any, res: any) => {
@@ -24,5 +23,5 @@ export const getVideos = (req: any, res: any) => {
 }
 
 app.get('/', helloWorld)
-app.get('/testing/all-data', deleteAll)
+app.delete('/testing/all-data', deleteAll)
 app.get(SETTINGS.PATH.VIDEOS, getVideos)

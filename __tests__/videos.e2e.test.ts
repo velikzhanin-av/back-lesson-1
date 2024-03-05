@@ -2,7 +2,7 @@ import {req} from "./test-helpers";
 import {db} from "../src/app";
 
 
-describe('/testing/all-data', () => {
+describe(  'GET /testing/all-data', () => {
     it('return code status 204', async () => {
         const res = await req
             .delete('/testing/all-data')
@@ -10,7 +10,7 @@ describe('/testing/all-data', () => {
     })
 });
 
-describe('get /videos', () => {
+describe('GET /videos', () => {
     it('return all videos and code status 200', async () => {
         db.videos = [{title: 'title any video'}]
 
@@ -52,3 +52,24 @@ describe('POST /videos', () => {
     })
 });
 
+describe('GET /videos/{id}', () => {
+    it('return video by id and code status 200', async () => {
+        const newVideo = {
+            "id": 0,
+            "title": body.title,
+            "author": body.author,
+            "canBeDownloaded": true,
+            "minAgeRestriction": null,
+            "createdAt": "2024-03-03T18:01:06.938Z",
+            "publicationDate": "2024-03-03T18:01:06.938Z",
+            "availableResolutions": body.availableResolutions
+        }
+        db.videos.push(newVideo)
+
+        const res = await req
+            .get('/videos')
+            .expect(200)
+
+        expect(res.body.length).toBe(1)
+    })
+});

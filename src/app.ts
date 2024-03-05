@@ -55,8 +55,29 @@ export const createVideo = (req: any, res: any) => {
         .json(newVideo)
 }
 
+export const getVideoById = (req: any, res: any) => {
+    const newVideo = {
+        "id": 88,
+        "title": "string",
+        "author": "string",
+        "canBeDownloaded": true,
+        "minAgeRestriction": null,
+        "createdAt": "2024-03-03T18:01:06.938Z",
+        "publicationDate": "2024-03-03T18:01:06.938Z",
+        "availableResolutions": [
+            "P144"
+        ]
+    }
+    db.videos.push(newVideo)
+
+    res
+        .status(201)
+        .json(newVideo)
+}
+
 
 app.get('/', helloWorld)
 app.delete('/testing/all-data', deleteAll)
 app.get(SETTINGS.PATH.VIDEOS, getVideos)
 app.post(SETTINGS.PATH.VIDEOS, createVideo)
+app.get(SETTINGS.PATH.VIDEOS + , createVideo)

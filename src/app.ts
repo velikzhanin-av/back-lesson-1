@@ -1,7 +1,6 @@
 import express from 'express'
 import {SETTINGS} from "./settings";
 import {createDB} from "./db";
-import any = jasmine.any;
 
 export const app = express()
 app.use(express.json())

@@ -56,13 +56,16 @@ describe('GET /videos/{id}', () => {
     it('return video by id and code status 200', async () => {
         const newVideo = {
             "id": 0,
-            "title": body.title,
-            "author": body.author,
+            "title": "title test",
+            "author": "author test",
             "canBeDownloaded": true,
             "minAgeRestriction": null,
             "createdAt": "2024-03-03T18:01:06.938Z",
             "publicationDate": "2024-03-03T18:01:06.938Z",
-            "availableResolutions": body.availableResolutions
+            "availableResolutions": [
+                "P144",
+                "P480",
+            ]
         }
         db.videos.push(newVideo)
 

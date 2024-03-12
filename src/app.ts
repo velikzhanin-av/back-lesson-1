@@ -29,8 +29,8 @@ export const getVideos = (req: any, res: any) => {
                 "author": "string",
                 "canBeDownloaded": false,
                 "minAgeRestriction": null,
-                "createdAt": "2024-03-03T18:01:06.938Z",
-                "publicationDate": "2024-03-03T18:01:06.938Z",
+                "createdAt": new Date().toISOString(),
+                "publicationDate": new Date().toISOString(),
                 "availableResolutions": [
                     "P144"
                 ]
@@ -59,8 +59,8 @@ export const createVideo = (req: any, res: any) => {
             "author": req.body.author,
             "canBeDownloaded": false,
             "minAgeRestriction": null,
-            "createdAt": "2024-03-03T18:01:06.938Z",
-            "publicationDate": "2024-03-03T18:01:06.938Z",
+            "createdAt": new Date().toISOString(),
+            "publicationDate": new Date().toISOString(),
             "availableResolutions": req.body.availableResolutions
         }
         db.videos.push(newVideo)
@@ -80,8 +80,8 @@ export const getVideoById = (req: any, res: any) => {
         "author": "string",
         "canBeDownloaded": true,
         "minAgeRestriction": null,
-        "createdAt": "2024-03-03T18:01:06.938Z",
-        "publicationDate": "2024-03-03T18:01:06.938Z",
+        "createdAt": new Date().toISOString(),
+        "publicationDate": new Date().toISOString(),
         "availableResolutions": [
             "P144"
         ]

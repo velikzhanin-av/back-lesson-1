@@ -37,8 +37,8 @@ describe('POST /videos', () => {
             "author": body.author,
             "canBeDownloaded": false,
             "minAgeRestriction": null,
-            "createdAt": "2024-03-03T18:01:06.938Z",
-            "publicationDate": "2024-03-03T18:01:06.938Z",
+            "createdAt": new Date().toISOString(),
+            "publicationDate": new Date().toISOString(),
             "availableResolutions": body.availableResolutions
         }
         db.videos.push(newVideo)
@@ -60,8 +60,8 @@ describe('GET /videos/{id}', () => {
             "author": "author test",
             "canBeDownloaded": false,
             "minAgeRestriction": null,
-            "createdAt": "2024-03-03T18:01:06.938Z",
-            "publicationDate": "2024-03-03T18:01:06.938Z",
+            "createdAt": new Date().toISOString(),
+            "publicationDate": new Date().toISOString(),
             "availableResolutions": [
                 "P144",
                 "P480",

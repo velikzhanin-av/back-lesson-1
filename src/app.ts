@@ -26,7 +26,7 @@ export const getVideos = (req: any, res: any) => {
                 "id": 0,
                 "title": "string",
                 "author": "string",
-                "canBeDownloaded": true,
+                "canBeDownloaded": false,
                 "minAgeRestriction": null,
                 "createdAt": "2024-03-03T18:01:06.938Z",
                 "publicationDate": "2024-03-03T18:01:06.938Z",
@@ -37,12 +37,12 @@ export const getVideos = (req: any, res: any) => {
         ])
 }
 
-export const createVideo = (req: any, res: any) => {
+export const    createVideo = (req: any, res: any) => {
     const newVideo = {
         "id": 0,
         "title": req.body.title,
         "author": req.body.author,
-        "canBeDownloaded": true,
+        "canBeDownloaded": false,
         "minAgeRestriction": null,
         "createdAt": "2024-03-03T18:01:06.938Z",
         "publicationDate": "2024-03-03T18:01:06.938Z",

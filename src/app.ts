@@ -1,6 +1,7 @@
 import express from 'express'
 import {SETTINGS} from "./settings";
 import {createDB} from "./db";
+import any = jasmine.any;
 
 export const app = express()
 app.use(express.json())
@@ -37,22 +38,39 @@ export const getVideos = (req: any, res: any) => {
         ])
 }
 
-export const    createVideo = (req: any, res: any) => {
-    const newVideo = {
-        "id": 0,
-        "title": req.body.title,
-        "author": req.body.author,
-        "canBeDownloaded": false,
-        "minAgeRestriction": null,
-        "createdAt": "2024-03-03T18:01:06.938Z",
-        "publicationDate": "2024-03-03T18:01:06.938Z",
-        "availableResolutions": req.body.availableResolutions
+export const createVideo = (req: any, res: any) => {
+    let errorsMessages: any = {
+        "errorsMessages": []
     }
-    db.videos.push(newVideo)
 
-    res
-        .status(201)
-        .json(newVideo)
+    if (typeof req.body.title !== "string") {
+        let error:object = {
+            "message": "field must type 'string'",
+            "field": "title"
+        }
+        errorsMessages.errorsMessages.push(error)
+        res
+            .status(400)
+            .json(errorsMessages)
+    } else {
+        const newVideo = {
+            "id": 0,
+            "title": req.body.title,
+            "author": req.body.author,
+            "canBeDownloaded": false,
+            "minAgeRestriction": null,
+            "createdAt": "2024-03-03T18:01:06.938Z",
+            "publicationDate": "2024-03-03T18:01:06.938Z",
+            "availableResolutions": req.body.availableResolutions
+        }
+        db.videos.push(newVideo)
+
+        res
+            .status(201)
+            .json(newVideo)
+    }
+
+
 }
 
 export const getVideoById = (req: any, res: any) => {

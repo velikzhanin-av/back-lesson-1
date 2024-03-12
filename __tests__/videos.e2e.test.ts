@@ -2,7 +2,7 @@ import {req} from "./test-helpers";
 import {db} from "../src/app";
 
 
-describe(  'GET /testing/all-data', () => {
+describe(  'DELETE /testing/all-data', () => {
     it('return code status 204', async () => {
         const res = await req
             .delete('/testing/all-data')

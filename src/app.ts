@@ -7,6 +7,9 @@ app.use(express.json())
 
 export const db = createDB()
 
+enum availableResolutions { P144, P240, P360, P480, P720, P1080, P1440, P2160}
+
+
 export const helloWorld = (req: any, res: any) => {
     res
         .send("Hello World")
@@ -43,15 +46,21 @@ export const createVideo = (req: any, res: any) => {
     }
 
     if (typeof req.body.title !== "string") {
-        let error:object = {
+        let error: object = {
             "message": "field must type 'string'",
             "field": "title"
         }
         errorsMessages.errorsMessages.push(error)
-        res
-            .status(400)
-            .json(errorsMessages)
-    } else {
+    }
+    if (typeof req.body.author !== "string") {
+        let error: object = {
+            "message": "field must type 'string'",
+            "field": "author"
+        }
+        errorsMessages.errorsMessages.push(error)
+    }
+
+    if (errorsMessages.errorsMessages.length === 0) {
         const newVideo = {
             "id": 0,
             "title": req.body.title,
@@ -67,9 +76,11 @@ export const createVideo = (req: any, res: any) => {
         res
             .status(201)
             .json(newVideo)
+    } else {
+        res
+            .status(400)
+            .json(errorsMessages)
     }
-
-
 }
 
 export const getVideoById = (req: any, res: any) => {

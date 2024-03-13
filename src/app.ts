@@ -31,8 +31,8 @@ export const getVideos = (req: any, res: any) => {
                 "author": "string",
                 "canBeDownloaded": false,
                 "minAgeRestriction": null,
-                "createdAt": new Date().toISOString(),
-                "publicationDate": new Date().toISOString(),
+                "createdAt": "2024-03-13T08:53:06.967Z",
+                "publicationDate": "2024-03-14T08:53:06.967Z",
                 "availableResolutions": [
                     "P144"
                 ]
@@ -61,14 +61,16 @@ export const createVideo = (req: any, res: any) => {
     }
 
     if (errorsMessages.errorsMessages.length === 0) {
+        let now = new Date()
+
         const newVideo = {
             "id": 0,
             "title": req.body.title,
             "author": req.body.author,
             "canBeDownloaded": false,
             "minAgeRestriction": null,
-            "createdAt": new Date().toISOString(),
-            "publicationDate": new Date().toISOString(),
+            "createdAt": now.toISOString(),
+            "publicationDate": now.setDate(now.getDate() + 1),
             "availableResolutions": req.body.availableResolutions
         }
         db.videos.push(newVideo)

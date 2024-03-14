@@ -9,6 +9,54 @@ export const db = createDB()
 
 enum availableResolutions { P144, P240, P360, P480, P720, P1080, P1440, P2160}
 
+export const inputValidation = (inputData:any) => {
+    let errorsMessages: any = {
+        "errorsMessages": []
+    }
+    if (typeof inputData.title === 'undefined') {
+        let error: object = {
+            "message": "required field",
+            "field": "title"
+        }
+        errorsMessages.errorsMessages.push(error)
+        return errorsMessages
+    } else if (typeof inputData.title !== "string") {
+        let error: object = {
+            "message": "field must type 'string'",
+            "field": "title"
+        }
+        errorsMessages.errorsMessages.push(error)
+    } else if (inputData.title.length > 40) {
+        let error: object = {
+            "message": "required max length: 40",
+            "field": "title"
+        }
+        errorsMessages.errorsMessages.push(error)
+    }
+
+    if (typeof inputData.author === 'undefined') {
+        let error: object = {
+            "message": "required field",
+            "field": "author"
+        }
+        errorsMessages.errorsMessages.push(error)
+        return errorsMessages
+    } else if (typeof inputData.author !== "string") {
+        let error: object = {
+            "message": "field must type 'string'",
+            "field": "author"
+        }
+        errorsMessages.errorsMessages.push(error)
+    } else if (inputData.title.author > 20) {
+        let error: object = {
+            "message": "required max length: 40",
+            "field": "author"
+        }
+        errorsMessages.errorsMessages.push(error)
+    }
+
+    return errorsMessages
+}
 
 export const helloWorld = (req: any, res: any) => {
     res
@@ -41,36 +89,21 @@ export const getVideos = (req: any, res: any) => {
 }
 
 export const createVideo = (req: any, res: any) => {
-    let errorsMessages: any = {
-        "errorsMessages": []
-    }
-
-    if (typeof req.body.title !== "string") {
-        let error: object = {
-            "message": "field must type 'string'",
-            "field": "title"
-        }
-        errorsMessages.errorsMessages.push(error)
-    }
-    if (typeof req.body.author !== "string") {
-        let error: object = {
-            "message": "field must type 'string'",
-            "field": "author"
-        }
-        errorsMessages.errorsMessages.push(error)
-    }
+    const errorsMessages = inputValidation(req.body)
 
     if (errorsMessages.errorsMessages.length === 0) {
-        let now = new Date()
-
+        const createdAt = new Date()
+        const publicationDate = new Date()
+        publicationDate.setDate(publicationDate.getDate() + 1)
+// 1224214
         const newVideo = {
             "id": 0,
             "title": req.body.title,
             "author": req.body.author,
             "canBeDownloaded": false,
             "minAgeRestriction": null,
-            "createdAt": now.toISOString(),
-            "publicationDate": now.setDate(now.getDate() + 1),
+            "createdAt": createdAt.toISOString(),
+            "publicationDate": publicationDate.toISOString(),
             "availableResolutions": req.body.availableResolutions
         }
         db.videos.push(newVideo)
@@ -86,28 +119,20 @@ export const createVideo = (req: any, res: any) => {
 }
 
 export const getVideoById = (req: any, res: any) => {
-    const newVideo = {
-        "id": 88,
-        "title": "string",
-        "author": "string",
-        "canBeDownloaded": true,
-        "minAgeRestriction": null,
-        "createdAt": new Date().toISOString(),
-        "publicationDate": new Date().toISOString(),
-        "availableResolutions": [
-            "P144"
-        ]
+    const resultVideo = db.videos.find(item => item.id == Number(req.params.id))
+    if (resultVideo) {
+        res
+            .status(200)
+            .json(resultVideo)
+    } else {
+        res
+            .status(404)
     }
-    db.videos.push(newVideo)
 
-    res
-        .status(201)
-        .json(newVideo)
 }
-
 
 app.get('/', helloWorld)
 app.delete('/testing/all-data', deleteAll)
 app.get(SETTINGS.PATH.VIDEOS, getVideos)
 app.post(SETTINGS.PATH.VIDEOS, createVideo)
-// app.get(SETTINGS.PATH.VIDEOS + , createVideo)
+app.get(SETTINGS.PATH.VIDEOS + '/:id' , getVideoById)

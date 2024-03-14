@@ -31,14 +31,17 @@ describe('POST /videos', () => {
                 "P144"
             ]
         }
+        const createdAt = new Date()
+        const publicationDate = new Date()
+        publicationDate.setDate(publicationDate.getDate() + 1)
         const newVideo = {
             "id": 0,
             "title": body.title,
             "author": body.author,
             "canBeDownloaded": false,
             "minAgeRestriction": null,
-            "createdAt": new Date().toISOString(),
-            "publicationDate": new Date().toISOString(),
+            "createdAt": createdAt.toISOString(),
+            "publicationDate": publicationDate.toISOString(),
             "availableResolutions": body.availableResolutions
         }
         db.videos.push(newVideo)

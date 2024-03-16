@@ -47,14 +47,13 @@ export const inputValidation = (inputData:any) => {
             "field": "author"
         }
         errorsMessages.errorsMessages.push(error)
-    } else if (inputData.title.author > 20) {
+    } else if (inputData.author.length > 20) {
         let error: object = {
-            "message": "required max length: 40",
+            "message": "required max length: 20",
             "field": "author"
         }
         errorsMessages.errorsMessages.push(error)
     }
-
     return errorsMessages
 }
 
@@ -95,7 +94,7 @@ export const createVideo = (req: any, res: any) => {
         const createdAt = new Date()
         const publicationDate = new Date()
         publicationDate.setDate(publicationDate.getDate() + 1)
-// 1224214
+
         const newVideo = {
             "id": 0,
             "title": req.body.title,

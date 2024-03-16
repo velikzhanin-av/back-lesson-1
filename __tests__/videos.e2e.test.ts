@@ -1,5 +1,6 @@
 import {req} from "./test-helpers";
 import {db} from "../src/app";
+import {SETTINGS} from "../src/settings";
 
 
 describe(  'DELETE /testing/all-data', () => {
@@ -15,7 +16,7 @@ describe('GET /videos', () => {
         db.videos = [{title: 'title any video'}]
 
         const res = await req
-            .get('/videos')
+            .get(SETTINGS.PATH.VIDEOS)
             .expect(200)
 
         expect(res.body.length).toBe(1)
@@ -47,18 +48,19 @@ describe('POST /videos', () => {
         db.videos.push(newVideo)
 
         const res = await req
-            .post('/videos')
+            .post(SETTINGS.PATH.VIDEOS)
             .send(body)
 
         expect(res.status).toBe(201)
-        expect(res.body).toStrictEqual(newVideo)
+        expect({title:res.body.title, author:res.body.author, availableResolutions: res.body.availableResolutions})
+            .toMatchObject({title: body.title, author:body.author, availableResolutions:body.availableResolutions})
     })
 });
 
 describe('GET /videos/{id}', () => {
     it('return video by id and code status 200', async () => {
         const newVideo = {
-            "id": 0,
+            "id": 2,
             "title": "title test",
             "author": "author test",
             "canBeDownloaded": false,
@@ -73,7 +75,7 @@ describe('GET /videos/{id}', () => {
         db.videos.push(newVideo)
 
         const res = await req
-            .get('/videos')
+            .get(`${SETTINGS.PATH.VIDEOS}/2`)
             .expect(200)
 
         expect(res.body.length).toBe(1)

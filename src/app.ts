@@ -1,7 +1,5 @@
 import express from 'express'
-import {SETTINGS} from "./settings";
 import {createDB} from "./db";
-import {videosRouter} from "./routes/videos/route";
 
 export const app = express()
 app.use(express.json())

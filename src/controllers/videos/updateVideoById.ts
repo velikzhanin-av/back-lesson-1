@@ -8,14 +8,13 @@ export const validation = (inputData:any) => {
             "errorsMessages": []
         }
 
-        if (typeof inputData.canBeDownloaded !== 'boolean') {
-            errorsMessages.errorsMessages.push({
-                "message": "must boolean type",
-                "field": "canBeDownloaded"
-            })
+    if (typeof inputData.canBeDownloaded !== 'boolean') {
+        errorsMessages.errorsMessages.push({
+            "message": "must boolean type",
+            "field": "canBeDownloaded"
+        })
         }
     }
-
     return errorsMessages
 }
 

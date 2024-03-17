@@ -7,43 +7,17 @@ export const inputValidation = (inputData:any) => {
     const title = inputData.title
     const author = inputData.author
 
-    if (typeof title === 'undefined') {
+    if (typeof title === 'undefined' || typeof title !== "string" || title.length > 40) {
         let error: object = {
-            "message": "required field",
-            "field": "title"
-        }
-        errorsMessages.errorsMessages.push(error)
-        return errorsMessages
-    } else if (typeof title !== "string") {
-        let error: object = {
-            "message": "field must type 'string'",
-            "field": "title"
-        }
-        errorsMessages.errorsMessages.push(error)
-    } else if (title.length > 40) {
-        let error: object = {
-            "message": "required max length: 40",
+            "message": "error",
             "field": "title"
         }
         errorsMessages.errorsMessages.push(error)
     }
 
-    if (typeof author === 'undefined') {
+    if (typeof author === 'undefined' || typeof author !== "string" || author.length > 20) {
         let error: object = {
             "message": "required field",
-            "field": "author"
-        }
-        errorsMessages.errorsMessages.push(error)
-        return errorsMessages
-    } else if (typeof author !== "string") {
-        let error: object = {
-            "message": "field must type 'string'",
-            "field": "author"
-        }
-        errorsMessages.errorsMessages.push(error)
-    } else if (author.length > 20) {
-        let error: object = {
-            "message": "required max length: 20",
             "field": "author"
         }
         errorsMessages.errorsMessages.push(error)

@@ -1,20 +1,22 @@
 import {db} from "../../db/db";
 import {inputValidation} from "./inputValidation";
 
-export const validation = (inputData:any) => {
+export const validation = (inputData: any) => {
     let errorsMessages = inputValidation(inputData)
     if (!errorsMessages) {
         let errorsMessages: any = {
             "errorsMessages": []
         }
+    }
 
     if (typeof inputData.canBeDownloaded !== 'boolean') {
         errorsMessages.errorsMessages.push({
             "message": "must boolean type",
             "field": "canBeDownloaded"
         })
-        }
     }
+
+
     return errorsMessages
 }
 
@@ -23,9 +25,8 @@ export const updateVideoById = (req: any, res: any) => {
     if (video) {
         const errorsMessages = validation(req.body)
         if (errorsMessages.errorsMessages.length === 0) {
-            for (let qwerty in req.body) {
-                console.log(qwerty)
-                video[qwerty] = req.body[qwerty]
+            for (let key in req.body) {
+                video[key] = req.body[key]
             }
             res
                 .sendStatus(204)

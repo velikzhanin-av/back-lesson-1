@@ -12,6 +12,7 @@ export const updateVideoById = (req: any, res: any) => {
             }
             res
                 .status(204)
+                .json({})
         } else {
             res
                 .status(400)
@@ -20,6 +21,7 @@ export const updateVideoById = (req: any, res: any) => {
     } else {
         res
             .status(404)
+            .json({})
     }
 }
 

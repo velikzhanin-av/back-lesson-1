@@ -21,7 +21,7 @@ export const validation = (inputData:any) => {
 export const updateVideoById = (req: any, res: any) => {
     let video = db.videos.find(item => item.id == Number(req.params.id))
     if (video) {
-        const errorsMessages = inputValidation(req.body)
+        const errorsMessages = validation(req.body)
         if (errorsMessages.errorsMessages.length === 0) {
             for (let qwerty in req.body) {
                 console.log(qwerty)

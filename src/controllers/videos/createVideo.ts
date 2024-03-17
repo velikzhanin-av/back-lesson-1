@@ -10,7 +10,7 @@ export const createVideo = (req: any, res: any) => {
 
     if (errorsMessages.errorsMessages.length === 0) {
         const newVideo = {
-            // "id": Math.floor(Math.random() * 100000),
+            //1 "id": Math.floor(Math.random() * 100000),
             "id": 0,
             "title": req.body.title,
             "author": req.body.author,

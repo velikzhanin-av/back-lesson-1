@@ -34,5 +34,11 @@ export const inputValidation = (inputData:any) => {
             }
         }
     }
+
+    if (typeof inputData.minAgeRestriction !== 'number' || inputData.minAgeRestriction < 1 || inputData.minAgeRestriction > 18)
+        errorsMessages.errorsMessages.push({
+            "message": "error",
+            "field": "minAgeRestriction"
+        })
     return errorsMessages
 }

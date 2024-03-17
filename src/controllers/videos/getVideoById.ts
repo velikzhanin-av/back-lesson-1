@@ -8,7 +8,7 @@ export const getVideoById = (req: any, res: any) => {
             .json(resultVideo)
     } else {
         res
-            .status(404)
+            .sendStatus(404)
     }
 
 }

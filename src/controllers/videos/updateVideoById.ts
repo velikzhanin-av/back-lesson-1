@@ -1,6 +1,24 @@
 import {db} from "../../db/db";
 import {inputValidation} from "./inputValidation";
 
+export const validation = (inputData:any) => {
+    let errorsMessages = inputValidation(inputData)
+    if (!errorsMessages) {
+        let errorsMessages: any = {
+            "errorsMessages": []
+        }
+
+        if (typeof inputData.canBeDownloaded !== 'boolean') {
+            errorsMessages.errorsMessages.push({
+                "message": "must boolean type",
+                "field": "canBeDownloaded"
+            })
+        }
+    }
+
+    return errorsMessages
+}
+
 export const updateVideoById = (req: any, res: any) => {
     let video = db.videos.find(item => item.id == Number(req.params.id))
     if (video) {
@@ -11,8 +29,7 @@ export const updateVideoById = (req: any, res: any) => {
                 video[qwerty] = req.body[qwerty]
             }
             res
-                .status(204)
-                .json({})
+                .sendStatus(204)
         } else {
             res
                 .status(400)
@@ -20,8 +37,7 @@ export const updateVideoById = (req: any, res: any) => {
         }
     } else {
         res
-            .status(404)
-            .json({})
+            .sendStatus(404)
     }
 }
 

@@ -15,8 +15,6 @@ export const validation = (inputData: any) => {
             "field": "canBeDownloaded"
         })
     }
-
-
     return errorsMessages
 }
 

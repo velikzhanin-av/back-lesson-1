@@ -1,15 +1,16 @@
-import {db, inputValidation} from "../../app";
+import {inputValidation} from "./inputValidation";
+import {db} from "../../db/db";
 
 export const createVideo = (req: any, res: any) => {
+    const createdAt = new Date()
+    const publicationDate = new Date()
+    publicationDate.setDate(publicationDate.getDate() + 1)
+
     const errorsMessages = inputValidation(req.body)
 
     if (errorsMessages.errorsMessages.length === 0) {
-        const createdAt = new Date()
-        const publicationDate = new Date()
-        publicationDate.setDate(publicationDate.getDate() + 1)
-
         const newVideo = {
-            "id": 0,
+            "id": Math.floor(Math.random() * 100000),
             "title": req.body.title,
             "author": req.body.author,
             "canBeDownloaded": false,
@@ -28,9 +29,4 @@ export const createVideo = (req: any, res: any) => {
             .status(400)
             .json(errorsMessages)
     }
-}
-
-export const helloWorld = (req: any, res: any) => {
-    res
-        .send("Hello World")
 }

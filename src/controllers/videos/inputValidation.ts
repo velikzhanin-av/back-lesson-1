@@ -42,6 +42,14 @@ export const inputValidation = (inputData:any) => {
             })
         }
     }
+    if (inputData.publicationDate) {
+        if (typeof inputData.publicationDate !== 'string') {
+            errorsMessages.errorsMessages.push({
+                "message": "error",
+                "field": "publicationDate"
+            })
+        }
+    }
 
     return errorsMessages
 }

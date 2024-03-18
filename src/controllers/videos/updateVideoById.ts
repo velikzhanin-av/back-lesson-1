@@ -20,22 +20,24 @@ export const validation = (inputData: any) => {
 
 export const updateVideoById = (req: any, res: any) => {
     let video = db.videos.find(item => item.id == Number(req.params.id))
-    if (video) {
-        const errorsMessages = validation(req.body)
-        if (errorsMessages.errorsMessages.length === 0) {
-            for (let key in req.body) {
-                video[key] = req.body[key]
-            }
-            res
-                .sendStatus(204)
-        } else {
-            res
-                .status(400)
-                .json(errorsMessages)
-        }
-    } else {
+    if (!video) {
         res
             .sendStatus(404)
+        return
     }
+
+    const errorsMessages = validation(req.body)
+    if (errorsMessages.errorsMessages.length) {
+        res
+            .status(400)
+            .json(errorsMessages)
+        return
+    }
+
+    for (let key in req.body) {
+        video[key] = req.body[key]
+    }
+    res
+        .sendStatus(204)
 }
 
